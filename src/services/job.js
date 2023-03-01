@@ -10,7 +10,7 @@ const findUnpaidJobs = async (profileId) => {
     include: {
       model: Contract,
       attributes: [],
-      force: true,
+      required: true,
       where: {
         status: {
           [Op.eq]: "in_progress",
@@ -34,13 +34,13 @@ const payJob = async (jobId, profileId) => {
         },
         include: {
           model: Contract,
-          force: true,
+          required: true,
           where: {
             ClientId: profileId,
           },
           include: [
-            { model: Profile, as: "Contractor", force: true },
-            { model: Profile, as: "Client", force: true },
+            { model: Profile, as: "Contractor", required: true },
+            { model: Profile, as: "Client", required: true },
           ],
         },
       },
