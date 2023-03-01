@@ -16,8 +16,8 @@ const depositMoney = async (
   const clientDebtSum = await findClientDebtSum(targetClientId);
   const depositLimit = clientDebtSum * 0.25;
   if (clientDebtSum && depositAmount > depositLimit)
-    throw new HttpError("CLIENT_DEPOSIT_LIMIT_EXCEEDED", 401);
-    
+    throw new HttpError("CLIENT_DEPOSIT_LIMIT_EXCEEDED", 409);
+
   const t = await sequelize.transaction();
   try {
     const client = await Profile.findByPk(targetClientId, {

@@ -29,8 +29,7 @@ const payJob = async (jobId, profileId) => {
     const job = await Job.findOne(
       {
         where: {
-          id: jobId,
-          [Op.or]: [{ paid: null }, { paid: false }],
+          id: jobId
         },
         include: {
           model: Contract,
@@ -48,6 +47,7 @@ const payJob = async (jobId, profileId) => {
     );
 
     if (!job) throw new HttpError("JOB_NOT_FOUND", 404);
+    if (job.paid) throw new HttpError("JOB_ALREADY_PAID", 409);
 
     const client = job.Contract.Client;
     const contractor = job.Contract.Contractor;
