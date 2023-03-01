@@ -5,6 +5,8 @@ const {getProfile} = require('./middleware/getProfile')
 const contractsRouter = require("./routes/contract");
 const jobsRouter = require("./routes/job");
 const balancesRouter = require("./routes/balance");
+const adminRouter = require("./routes/admin");
+
 
 
 
@@ -18,6 +20,8 @@ app.use(getProfile)
 app.use("/contracts", contractsRouter);
 app.use("/jobs", jobsRouter);
 app.use("/balances", balancesRouter);
+app.use("/admin", adminRouter);
+
 
 
 module.exports = app;
