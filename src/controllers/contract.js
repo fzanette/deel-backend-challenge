@@ -1,17 +1,17 @@
-const { HttpError } = require("../utils/httpError");
-const { findOneContract, findContracts } = require("../services/contract");
+const { HttpError } = require('../utils/httpError');
+const { findOneContract, findContracts } = require('../services/contract');
 
 const getOneContractForProfile = async (req, res) => {
   try {
     const id = Number(req.params.id);
     const profile = req.profile;
     const contract = await findOneContract(id, profile.id);
-    if (!contract) throw new HttpError("NOT_FOUND_CONTRACT_FOR_PROFILE", 404);
+    if (!contract) throw new HttpError('NOT_FOUND_CONTRACT_FOR_PROFILE', 404);
     res.json(contract);
   } catch (error) {
     return res
       .status(error.statusCode || 500)
-      .json({ message: error.message || "Server Error" });
+      .json({ message: error.message || 'Server Error' });
   }
 };
 
@@ -23,7 +23,7 @@ const getContractsForProfile = async (req, res) => {
   } catch (error) {
     return res
       .status(error.statusCode || 500)
-      .json({ message: error.message || "Server Error" });
+      .json({ message: error.message || 'Server Error' });
   }
 };
 

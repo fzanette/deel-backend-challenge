@@ -1,5 +1,5 @@
-const { Contract } = require("../model");
-const { Op } = require("sequelize");
+const { Contract } = require('../model');
+const { Op } = require('sequelize');
 
 const findOneContract = async (id, profileId) => {
   const contract = await Contract.findOne({
@@ -11,14 +11,13 @@ const findOneContract = async (id, profileId) => {
   return contract;
 };
 const findContracts = async (profileId) => {
-    const contracts = await Contract.findAll({
-        where: {
-          status: { [Op.ne]: "terminated" },
-          [Op.or]: [{ ContractorId: profileId }, { ClientId: profileId }],
-        },
-      });
-    return contracts
-  };
+  const contracts = await Contract.findAll({
+    where: {
+      status: { [Op.ne]: 'terminated' },
+      [Op.or]: [{ ContractorId: profileId }, { ClientId: profileId }],
+    },
+  });
+  return contracts;
+};
 
-
-module.exports = {findOneContract, findContracts}
+module.exports = { findOneContract, findContracts };

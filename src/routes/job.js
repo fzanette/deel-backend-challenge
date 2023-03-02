@@ -1,9 +1,8 @@
 const express = require('express');
 const router = express.Router();
-const {getUnpaidJobsForProfile, payForJob} = require("../controllers/job")
+const { getUnpaidJobsForProfile, payForJob } = require('../controllers/job');
 
-router.get('/unpaid', getUnpaidJobsForProfile)
-router.post('/:job_id/pay', payForJob)
-
+router.get('/unpaid', getUnpaidJobsForProfile);
+router.post('/:job_id/pay', payForJob);
 
 module.exports = router;

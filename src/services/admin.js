@@ -1,15 +1,15 @@
-const { Job, Contract, Profile, sequelize } = require("../model");
-const { Op, QueryTypes } = require("sequelize");
+const { Job, Contract, Profile, sequelize } = require('../model');
+const { Op, QueryTypes } = require('sequelize');
 
 const findBestProfession = async (startDate, endDate) => {
   const bestPaidProfessions = await Job.findAll({
     attributes: [
-      [sequelize.col("Contract.Contractor.profession"), "profession"],
-      [sequelize.fn("SUM", sequelize.col("Job.price")), "totalEarned"],
+      [sequelize.col('Contract.Contractor.profession'), 'profession'],
+      [sequelize.fn('SUM', sequelize.col('Job.price')), 'totalEarned'],
     ],
     raw: true,
-    group: sequelize.col("Contract.Contractor.profession"),
-    order: [["profession", "DESC"]],
+    group: sequelize.col('Contract.Contractor.profession'),
+    order: [['profession', 'DESC']],
     limit: 1,
     include: {
       model: Contract,
@@ -17,7 +17,7 @@ const findBestProfession = async (startDate, endDate) => {
       required: true,
       include: {
         model: Profile,
-        as: "Contractor",
+        as: 'Contractor',
         attributes: [],
         required: true,
       },
@@ -57,4 +57,4 @@ const findBestClients = async (startDate, endDate, limit) => {
   return bestClients;
 };
 
-module.exports = { findBestProfession,findBestClients };
+module.exports = { findBestProfession, findBestClients };
