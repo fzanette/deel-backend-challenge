@@ -35,7 +35,7 @@ const depositMoney = async (targetClientId, profileCalling, depositAmount) => {
   }
 };
 const findClientDebtSum = async (clientId) => {
-  const clientDebtSum = Job.sum('price', {
+  const clientDebtSum = await Job.sum('price', {
     where: {
       [Op.or]: [{ paid: null }, { paid: false }],
     },
